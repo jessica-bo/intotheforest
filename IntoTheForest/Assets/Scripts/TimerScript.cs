@@ -10,27 +10,33 @@ public class TimerScript : MonoBehaviour
 
     public Light lightToDim;
     public float dimValue;
+
+    public GameObject player;
     
 
     void Awake() {
-        dimValue = 0.00001f;
+        dimValue = 0.00001f; // Would be better to calculate this based on timeRemaining 
     }
 
     void Update()
     {
-        if (timeRemaining > 0)
-        {
+        // Countdown time
+        if (timeRemaining > 0) {
             timeRemaining -= Time.deltaTime;
 
+            // Dim light
             if (lightToDim.intensity > 0.1) {
                 lightToDim.intensity -= dimValue;
+            }
+
+            if (player.transform.position.x > 10 && player.transform.transform.position.z > 10) {
+                SceneManager.LoadScene("WinGame");
             }
      
         }
 
-        else
-        {
-            SceneManager.LoadScene("EndGame");
+        else {
+            SceneManager.LoadScene("LoseGame");
         }
     }
 }

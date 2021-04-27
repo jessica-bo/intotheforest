@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/EndGame.unity
+    path: Assets/Scenes/LoseGame.unity
     guid: afccfda26ad75364c93d6dd537056c34
+  - enabled: 1
+    path: Assets/Scenes/WinGame.unity
+    guid: 7a8ee8e0abb7c8d4eae220a347cd9cc3
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: def449428eed05c459ab4c6a8f49b8bd
   m_configObjects: {}
