@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    public LevelChangerScript leverChangerScript;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -14,7 +17,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     public void PlayGame()
     {
-        SceneManager.LoadScene("Game");
+        leverChangerScript.FadeToLevel("Game");
+        // SceneManager.LoadScene("Game");
     }
 
     public void QuitGame ()

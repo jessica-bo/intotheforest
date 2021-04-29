@@ -12,10 +12,12 @@ public class TimerScript : MonoBehaviour
     public float dimValue;
 
     public GameObject player;
+
+    public LevelChangerScript leverChangerScript;
     
 
     void Awake() {
-        dimValue = 0.00001f; // Would be better to calculate this based on timeRemaining 
+        dimValue = 0.00005f; // Would be better to calculate this based on timeRemaining 
     }
 
     void Update()
@@ -30,13 +32,15 @@ public class TimerScript : MonoBehaviour
             }
 
             if (player.transform.position.x > 10 && player.transform.transform.position.z > 10) {
-                SceneManager.LoadScene("WinGame");
+                leverChangerScript.FadeToLevel("WinGame");
+                // SceneManager.LoadScene("WinGame");
             }
      
         }
 
         else {
-            SceneManager.LoadScene("LoseGame");
+            leverChangerScript.FadeToLevel("LoseGame");
+            // SceneManager.LoadScene("LoseGame");
         }
     }
 }
