@@ -8,6 +8,11 @@ public class RestartGame : MonoBehaviour
     
     public LevelChangerScript leverChangerScript;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void RestartButton() {
         leverChangerScript.FadeToLevel("Game");
         // SceneManager.LoadScene("Game");

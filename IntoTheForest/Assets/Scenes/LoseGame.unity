@@ -292,7 +292,7 @@ RectTransform:
   - {fileID: 118216593}
   - {fileID: 1129390249}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Oh dear, another one lost to the forest...
+  m_Text: 
 --- !u!222 &696317823
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -807,9 +807,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 143654953830936129, guid: 0b70352029e8ee44f89f879faf405b83, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 143654953830936135, guid: 0b70352029e8ee44f89f879faf405b83, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 143654953830936135, guid: 0b70352029e8ee44f89f879faf405b83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -849,6 +853,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 143654953830936135, guid: 0b70352029e8ee44f89f879faf405b83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 143654954216909558, guid: 0b70352029e8ee44f89f879faf405b83, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1335,7 +1343,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_ForceModuleActive: 1
 --- !u!114 &2088245310
 MonoBehaviour:
   m_ObjectHideFlags: 0

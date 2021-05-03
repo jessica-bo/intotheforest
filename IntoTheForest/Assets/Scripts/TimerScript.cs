@@ -14,7 +14,7 @@ public class TimerScript : MonoBehaviour
 
 
     public Light lightToDim;
-    public float dimValue = 0.00005f;
+    public float dimValue = 0.0005f;
 
     public GameObject player;
 
@@ -30,13 +30,7 @@ public class TimerScript : MonoBehaviour
     void Start()
     {
         AudioSource.PlayDelayed(halfRemaining);
-
     }
-
-    //void Awake()
-    //{
-     //   dimValue; // Would be better to calculate this based on timeRemaining 
-    //}
 
     void Update()
     {
@@ -54,6 +48,14 @@ public class TimerScript : MonoBehaviour
             if (lightToDim.color.g > 0.2)
             {
                 lightToDim.color -= (Color.green / (halfRemaining * 2.0f)) * Time.deltaTime;
+            }
+            if (lightToDim.color.r > 0.3)
+            {
+                lightToDim.color -= (Color.red / (halfRemaining * 3.0f)) * Time.deltaTime;
+            }
+            if (lightToDim.color.b > 0.4)
+            {
+                lightToDim.color -= (Color.blue / (halfRemaining * 5.0f)) * Time.deltaTime;
             }
 
             if (player.transform.position.x > 10 && player.transform.transform.position.z > 10)
