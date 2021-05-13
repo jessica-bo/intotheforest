@@ -14,7 +14,7 @@ public class TimerScript : MonoBehaviour
 
 
     public Light lightToDim;
-    public float dimValue = 0.0005f;
+    public float dimValue = 0.01f;
 
     public GameObject player;
 
@@ -47,15 +47,15 @@ public class TimerScript : MonoBehaviour
 
             if (lightToDim.color.g > 0.2)
             {
-                lightToDim.color -= (Color.green / (halfRemaining * 2.0f)) * Time.deltaTime;
+                lightToDim.color -= (Color.green / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
-            if (lightToDim.color.r > 0.3)
+            if (lightToDim.color.r > 0.2)
             {
-                lightToDim.color -= (Color.red / (halfRemaining * 3.0f)) * Time.deltaTime;
+                lightToDim.color -= (Color.red / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
             if (lightToDim.color.b > 0.4)
             {
-                lightToDim.color -= (Color.blue / (halfRemaining * 5.0f)) * Time.deltaTime;
+                lightToDim.color -= (Color.blue / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
 
             if (player.transform.position.x > 10 && player.transform.transform.position.z > 10)
