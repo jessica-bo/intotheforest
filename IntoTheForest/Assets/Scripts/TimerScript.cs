@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 public class TimerScript : MonoBehaviour
 {
 
-    public float timeRemaining = 10f;
+    public float timeRemaining = 10.0f;
     public float halfRemaining = 5f;
 
     public float fadeTime;
 
 
     public Light lightToDim;
-    public float dimValue = 0.01f;
+    public float dimValue = 0.1f;
 
     public GameObject player;
 
@@ -26,6 +26,8 @@ public class TimerScript : MonoBehaviour
     bool fadeInit = false;
 
     public float step = 0;
+
+    public float _skyboxBlendFactor = 0f;
 
     void Start()
     {
@@ -39,17 +41,23 @@ public class TimerScript : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
 
+            if (_skyboxBlendFactor < 1) 
+            {
+                _skyboxBlendFactor += 0.01f * Time.deltaTime;
+                RenderSettings.skybox.SetFloat("_Blend", _skyboxBlendFactor);
+            }
+
             // Dim light
             if (lightToDim.intensity > 0.1)
             {
-                lightToDim.intensity -= dimValue / halfRemaining * Time.deltaTime;
+                lightToDim.intensity -= dimValue * Time.deltaTime;
             }
 
             if (lightToDim.color.g > 0.2)
             {
                 lightToDim.color -= (Color.green / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
-            if (lightToDim.color.r > 0.2)
+            if (lightToDim.color.r > 0.3)
             {
                 lightToDim.color -= (Color.red / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
