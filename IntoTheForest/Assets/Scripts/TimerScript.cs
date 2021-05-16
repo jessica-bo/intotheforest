@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TimerScript : MonoBehaviour
@@ -20,6 +21,8 @@ public class TimerScript : MonoBehaviour
 
     public LevelChangerScript leverChangerScript;
 
+    public AudioMixer mixer;
+
     public AudioSource AudioSource_ominous;
     public AudioSource AudioSource_ambient;
     public AudioSource AudioSource_birds;
@@ -34,6 +37,7 @@ public class TimerScript : MonoBehaviour
     {
         //AudioSource_ominous.PlayDelayed(halfRemaining - fadeTime / 2);
         //AudioSource_crows.PlayDelayed(halfRemaining - fadeTime / 2);
+        mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
     }
 
     void Update()
@@ -74,7 +78,7 @@ public class TimerScript : MonoBehaviour
                 // SceneManager.LoadScene("WinGame");
             }
 
-            if (fadeInit != true && timeRemaining < halfRemaining - fadeTime / 2)
+            if (fadeInit != true && timeRemaining < halfRemaining + fadeTime / 2)
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ambient, fadeTime, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, fadeTime, 1));

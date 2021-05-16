@@ -41,7 +41,7 @@ namespace Unity.FPS.Game
 
         void Start()
         {
-            AudioUtility.SetMasterVolume(1);
+            AudioUtility.SetMasterVolume(PlayerPrefs.GetFloat("MusicVolume", 0.75f));
         }
 
         void Update()
