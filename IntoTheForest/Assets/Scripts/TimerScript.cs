@@ -72,7 +72,7 @@ public class TimerScript : MonoBehaviour
                 lightToDim.color -= (Color.blue / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
 
-            if (player.transform.position.x > 10 && player.transform.transform.position.z > 10)
+            if (player.transform.position.x > 100 && player.transform.transform.position.z > 100)
             {
                 leverChangerScript.FadeToLevel("WinGame");
                 // SceneManager.LoadScene("WinGame");
