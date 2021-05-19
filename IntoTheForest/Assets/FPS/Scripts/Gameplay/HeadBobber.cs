@@ -6,7 +6,7 @@ namespace Unity.FPS.Gameplay
     public class HeadBobber : MonoBehaviour
     {
         public float walkingBobbingSpeed = 14f;
-        public float bobbingAmount = 0.05f;
+        public float bobbingAmount = 0.08f;
         public PlayerCharacterController controller;
 
         float defaultPosY = 0;
