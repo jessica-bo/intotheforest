@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.FPS.Gameplay;
 
 public class TimerScript : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class TimerScript : MonoBehaviour
     public GameObject player;
 
     public LevelChangerScript leverChangerScript;
+    public PlayerCharacterController PlayerCharacterController;
 
     public AudioMixer mixer;
 
@@ -72,9 +74,20 @@ public class TimerScript : MonoBehaviour
                 lightToDim.color -= (Color.blue / (halfRemaining * 10.0f)) * Time.deltaTime;
             }
 
+            if (PlayerCharacterController.MaxSpeedOnGround > 3)
+            {
+                PlayerCharacterController.MaxSpeedOnGround -= 0.05f * Time.deltaTime;
+                PlayerCharacterController.MaxSpeedInAir -= 0.075f * Time.deltaTime;
+            }
+
             if (player.transform.position.x > 100 && player.transform.transform.position.z > 100)
             {
-                leverChangerScript.FadeToLevel("WinGame");
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                StartCoroutine(winCoroutine());
+
                 // SceneManager.LoadScene("WinGame");
             }
 
@@ -92,8 +105,26 @@ public class TimerScript : MonoBehaviour
 
         else
         {
-            leverChangerScript.FadeToLevel("LoseGame");
+            StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+            StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
+            StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+            StartCoroutine(loseCoroutine());
+            // leverChangerScript.FadeToLevel("LoseGame");
             // SceneManager.LoadScene("LoseGame");
         }
     }
+
+    private IEnumerator winCoroutine()
+    {
+        yield return new WaitForSeconds(2);
+        leverChangerScript.FadeToLevel("WinGame");
+    }
+
+    private IEnumerator loseCoroutine()
+    {
+        yield return new WaitForSeconds(2);
+        leverChangerScript.FadeToLevel("LoseGame");
+    }
+
 }
