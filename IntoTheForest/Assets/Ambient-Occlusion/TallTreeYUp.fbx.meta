@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: dark leaves night
-    second: {fileID: 2100000, guid: 204bd828048ac744a8c4465702ef5324, type: 2}
+    second: {fileID: 2100000, guid: 02ef4b57d37463641a42cfadef739502, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

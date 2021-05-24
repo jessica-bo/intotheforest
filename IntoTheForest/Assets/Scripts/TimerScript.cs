@@ -9,14 +9,16 @@ using Unity.FPS.Gameplay;
 public class TimerScript : MonoBehaviour
 {
 
-    public float timeRemaining = 10.0f;
-    public float halfRemaining = 5f;
+    public float timeRemaining;
+    public const float totalTime = 120f;
+    public float halfRemaining;
 
     public float fadeTime;
 
 
     public Light lightToDim;
-    public float dimValue = 0.1f;
+    public Color colStart = new Color(1f, 0.92f, 0.92f, 1f);
+    public Color colEnd = new Color(0.55f, 0.51f, 1f, 1f);
 
     public GameObject player;
 
@@ -34,12 +36,15 @@ public class TimerScript : MonoBehaviour
     bool fadeInit = false;
 
     public float _skyboxBlendFactor = 0f;
+    
 
     void Start()
     {
         //AudioSource_ominous.PlayDelayed(halfRemaining - fadeTime / 2);
         //AudioSource_crows.PlayDelayed(halfRemaining - fadeTime / 2);
+        RenderSettings.fogDensity = 0.005f;
         mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
+        lightToDim.color = colStart;
     }
 
     void Update()
@@ -56,23 +61,8 @@ public class TimerScript : MonoBehaviour
             }
 
             // Dim light
-            if (lightToDim.intensity > 0.1)
-            {
-                lightToDim.intensity -= dimValue * Time.deltaTime;
-            }
-
-            if (lightToDim.color.g > 0.2)
-            {
-                lightToDim.color -= (Color.green / (halfRemaining * 10.0f)) * Time.deltaTime;
-            }
-            if (lightToDim.color.r > 0.3)
-            {
-                lightToDim.color -= (Color.red / (halfRemaining * 10.0f)) * Time.deltaTime;
-            }
-            if (lightToDim.color.b > 0.4)
-            {
-                lightToDim.color -= (Color.blue / (halfRemaining * 10.0f)) * Time.deltaTime;
-            }
+            lightToDim.color = Color.Lerp(colStart, colEnd, Mathf.PingPong(Time.time, totalTime) / totalTime);
+            lightToDim.intensity -= 0.001f * Time.deltaTime;
 
             if (PlayerCharacterController.MaxSpeedOnGround > 3)
             {
@@ -99,6 +89,11 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, fadeTime, 0.25f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, timeRemaining-5, 1));
                 fadeInit = true;
+            }
+
+            if (timeRemaining < halfRemaining && RenderSettings.fogDensity < 0.04f) {
+                RenderSettings.fogDensity += 0.00001f; 
+                //fog colour?
             }
 
         }
