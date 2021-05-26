@@ -15,11 +15,9 @@ public class RestartGame : MonoBehaviour
     }
     public void RestartButton() {
         leverChangerScript.FadeToLevel("Game");
-        // SceneManager.LoadScene("Game");
     }
 
     public void MenuButton() {
         leverChangerScript.FadeToLevel("Menu");
-        // SceneManager.LoadScene("Menu");
     }
 }

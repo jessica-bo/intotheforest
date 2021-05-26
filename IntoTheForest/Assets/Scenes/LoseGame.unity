@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -418,8 +418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54, y: 88}
-  m_SizeDelta: {x: 450, y: 100}
+  m_AnchoredPosition: {x: 82.34438, y: 70.54242}
+  m_SizeDelta: {x: 623.1296, y: 149.0828}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696317821
 MonoBehaviour:
@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.12
-  fullText: Oh dear, another one lost to the forest...
   AudioSource_type: {fileID: 696317824}
 --- !u!114 &696317822
 MonoBehaviour:
@@ -1138,7 +1137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.224}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -280, y: -34}
+  m_AnchoredPosition: {x: -310, y: -50}
   m_SizeDelta: {x: 386, y: 647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1676333359

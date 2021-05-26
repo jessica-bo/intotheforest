@@ -38,11 +38,17 @@ public class TimerScript : MonoBehaviour
     public float _skyboxBlendFactor = 0f;
     
     public GameObject skull;
+    public GameObject winZone;
+    public Light winLight;
+    public Color winColStart = new Color(1f, 0.5f, 1f, 1f);
+    public Color winColEnd = new Color(1f, 0.8f, 1f, 1f);
+    public static string endText;
 
     void Start()
     {
         //AudioSource_ominous.PlayDelayed(halfRemaining - fadeTime / 2);
         //AudioSource_crows.PlayDelayed(halfRemaining - fadeTime / 2);
+        RenderSettings.fog = true;
         RenderSettings.fogDensity = 0.005f;
         mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
         lightToDim.color = colStart;
@@ -55,6 +61,7 @@ public class TimerScript : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
 
+            // Skybox
             if (_skyboxBlendFactor < 1) 
             {
                 _skyboxBlendFactor += 0.01f * Time.deltaTime;
@@ -63,14 +70,15 @@ public class TimerScript : MonoBehaviour
 
             // Dim light
             lightToDim.color = Color.Lerp(colStart, colEnd, Mathf.PingPong(Time.time, totalTime) / totalTime);
-            lightToDim.intensity -= 0.001f * Time.deltaTime;
+            lightToDim.intensity -= 0.002f * Time.deltaTime;
 
-            if (PlayerCharacterController.MaxSpeedOnGround > 3)
+            if (PlayerCharacterController.MaxSpeedOnGround > 3 && timeRemaining < halfRemaining)
             {
-                PlayerCharacterController.MaxSpeedOnGround -= 0.05f * Time.deltaTime;
-                PlayerCharacterController.MaxSpeedInAir -= 0.075f * Time.deltaTime;
+                PlayerCharacterController.MaxSpeedOnGround -= 0.1f * Time.deltaTime;
+                PlayerCharacterController.MaxSpeedInAir -= 0.125f * Time.deltaTime;
             }
 
+            // Audio
             if (fadeInit != true && timeRemaining < halfRemaining + fadeTime / 2)
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ambient, fadeTime, 0));
@@ -81,30 +89,50 @@ public class TimerScript : MonoBehaviour
                 fadeInit = true;
             }
 
-            if (timeRemaining < halfRemaining && RenderSettings.fogDensity < 0.04f) {
-                RenderSettings.fogDensity += 0.00001f; 
+            // Fog
+            if (timeRemaining < halfRemaining*2 && RenderSettings.fogDensity < 0.04f) {
+                RenderSettings.fogDensity += 0.000015f; 
                 //fog colour?
             }
 
-
-            if (player.transform.position.x > 100 && player.transform.transform.position.z > 100)
+            // Win zone
+            if (Mathf.Abs(player.transform.position.x - winZone.transform.position.x) < 12f && 
+            (Mathf.Abs(player.transform.position.z - winZone.transform.position.z) < 12f))
             {
+                float t = Mathf.PingPong (Time.time, 0.5f) / 0.5f;
+                winLight.color = Color.Lerp(winColStart, winColEnd, t);
+                winLight.intensity = Mathf.Lerp(0.5f, 2f, t);
+
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                StartCoroutine(winCoroutine());
-
-                // SceneManager.LoadScene("WinGame");
+                endText = "Drats, no dinner for me tonight . . .           You found the ancient protective sigils, I'll let you live this time";
+                StartCoroutine(winCoroutine(5f));
             }
 
-            if (Mathf.Abs(player.transform.position.x - skull.transform.position.x) < 20f && 
-            (Mathf.Abs(player.transform.position.z - skull.transform.position.z) < 10f))
+            // Cave death scenario
+            if ((player.transform.position.x - skull.transform.position.x) < -18f && 
+            (Mathf.Abs(player.transform.position.z - skull.transform.position.z) < 10f) &&
+            (Mathf.Abs(player.transform.position.y - skull.transform.position.y) < 10f))
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
-                StartCoroutine(loseCoroutine(0.5f));
+
+                endText = "How foolish, you stumbled right into my cave! Delicious morsels . . .";
+                StartCoroutine(loseCoroutine(1f));
+            }
+
+            // Out of zone scenario
+            if ((Mathf.Abs(player.transform.position.x) > 400f) || (Mathf.Abs(player.transform.position.z) > 400f))
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                endText = "You've crossed into the forbidden lands . . .  Enjoy a slow and painful death!";
+                StartCoroutine(loseCoroutine(1f));
             }
 
         }
@@ -115,15 +143,21 @@ public class TimerScript : MonoBehaviour
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
+            endText = "Oh dear, another one lost to the forest . . .  Better hasten your steps next time";
             StartCoroutine(loseCoroutine(2f));
             // leverChangerScript.FadeToLevel("LoseGame");
             // SceneManager.LoadScene("LoseGame");
         }
     }
 
-    private IEnumerator winCoroutine()
+    public static string getEndText()
     {
-        yield return new WaitForSeconds(2);
+        return endText;
+    }
+
+    private IEnumerator winCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         leverChangerScript.FadeToLevel("WinGame");
     }
 

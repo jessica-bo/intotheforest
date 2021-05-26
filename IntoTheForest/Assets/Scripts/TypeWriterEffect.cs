@@ -7,8 +7,7 @@ using UnityEngine.Audio;
 public class TypeWriterEffect : MonoBehaviour
 {
     
-    public float delay = 0.1f;
-    public string fullText;
+    public float delay = 0.04f;
     private string currentText = "";
     public AudioSource AudioSource_type;
 
@@ -18,7 +17,9 @@ public class TypeWriterEffect : MonoBehaviour
     }
 
     IEnumerator ShowText() {
-        yield return new WaitForSeconds(1.5f);
+        string fullText = TimerScript.getEndText();
+
+        yield return new WaitForSeconds(0f);
         AudioSource_type.Play();
         yield return new WaitForSeconds(1.5f);
 
