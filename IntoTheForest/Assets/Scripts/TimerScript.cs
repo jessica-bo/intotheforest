@@ -37,6 +37,7 @@ public class TimerScript : MonoBehaviour
 
     public float _skyboxBlendFactor = 0f;
     
+    public GameObject skull;
 
     void Start()
     {
@@ -70,17 +71,6 @@ public class TimerScript : MonoBehaviour
                 PlayerCharacterController.MaxSpeedInAir -= 0.075f * Time.deltaTime;
             }
 
-            if (player.transform.position.x > 100 && player.transform.transform.position.z > 100)
-            {
-                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
-                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
-                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
-
-                StartCoroutine(winCoroutine());
-
-                // SceneManager.LoadScene("WinGame");
-            }
-
             if (fadeInit != true && timeRemaining < halfRemaining + fadeTime / 2)
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ambient, fadeTime, 0));
@@ -96,6 +86,27 @@ public class TimerScript : MonoBehaviour
                 //fog colour?
             }
 
+
+            if (player.transform.position.x > 100 && player.transform.transform.position.z > 100)
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                StartCoroutine(winCoroutine());
+
+                // SceneManager.LoadScene("WinGame");
+            }
+
+            if (Mathf.Abs(player.transform.position.x - skull.transform.position.x) < 20f && 
+            (Mathf.Abs(player.transform.position.z - skull.transform.position.z) < 10f))
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+                StartCoroutine(loseCoroutine(0.5f));
+            }
+
         }
 
         else
@@ -104,7 +115,7 @@ public class TimerScript : MonoBehaviour
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-            StartCoroutine(loseCoroutine());
+            StartCoroutine(loseCoroutine(2f));
             // leverChangerScript.FadeToLevel("LoseGame");
             // SceneManager.LoadScene("LoseGame");
         }
@@ -116,9 +127,9 @@ public class TimerScript : MonoBehaviour
         leverChangerScript.FadeToLevel("WinGame");
     }
 
-    private IEnumerator loseCoroutine()
+    private IEnumerator loseCoroutine(float delay)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(delay);
         leverChangerScript.FadeToLevel("LoseGame");
     }
 
