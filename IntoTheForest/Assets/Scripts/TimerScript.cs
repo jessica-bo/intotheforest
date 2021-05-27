@@ -46,12 +46,16 @@ public class TimerScript : MonoBehaviour
 
     void Start()
     {
-        //AudioSource_ominous.PlayDelayed(halfRemaining - fadeTime / 2);
-        //AudioSource_crows.PlayDelayed(halfRemaining - fadeTime / 2);
         RenderSettings.fog = true;
         RenderSettings.fogDensity = 0.005f;
+
         mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
+
         lightToDim.color = colStart;
+        lightToDim.intensity = 1f;
+
+        winLight.color = winColStart;
+        // winLight.intensity = 1.5f;
     }
 
     void Update()
@@ -121,11 +125,11 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
                 endText = "How foolish, you stumbled right into my cave! Delicious morsels . . .";
-                StartCoroutine(loseCoroutine(1f));
+                StartCoroutine(loseCoroutine(1.5f));
             }
 
             // Out of zone scenario
-            if ((Mathf.Abs(player.transform.position.x) > 400f) || (Mathf.Abs(player.transform.position.z) > 400f))
+            if ((Mathf.Abs(player.transform.position.x) > 425f) || (Mathf.Abs(player.transform.position.z) > 400f))
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
