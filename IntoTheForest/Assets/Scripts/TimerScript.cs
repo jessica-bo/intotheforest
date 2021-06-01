@@ -40,6 +40,7 @@ public class TimerScript : MonoBehaviour
     public GameObject skull;
     public GameObject winZone;
     public GameObject winZoneOwl;
+    public GameObject winZoneMountain;
     public Light winLight;
     public Color winColStart = new Color(1f, 0.5f, 1f, 1f);
     public Color winColEnd = new Color(1f, 0.8f, 1f, 1f);
@@ -55,8 +56,6 @@ public class TimerScript : MonoBehaviour
         lightToDim.color = colStart;
         lightToDim.intensity = 1f;
 
-        // winLight.color = winColStart;
-        // winLight.intensity = 1.5f;
     }
 
     void Update()
@@ -100,7 +99,7 @@ public class TimerScript : MonoBehaviour
                 //fog colour?
             }
 
-            // Win zone
+            // Ruins win zone
             if (Mathf.Abs(player.transform.position.x - winZone.transform.position.x) < 12f && 
             (Mathf.Abs(player.transform.position.z - winZone.transform.position.z) < 12f))
             {
@@ -112,19 +111,32 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                endText = "Drats, no dinner for me tonight . . .           You found the ancient protective sigils, I'll let you live this time";
-                StartCoroutine(winCoroutine(5f));
+                endText = "Drats, no dinner for me tonight . . .           You found the protective sigils, I'll let you live this time";
+                StartCoroutine(winCoroutine(3f));
             }
 
-            if (Mathf.Abs(player.transform.position.x - winZoneOwl.transform.position.x) < 12f && 
-            (Mathf.Abs(player.transform.position.z - winZoneOwl.transform.position.z) < 12f))
+            // Owl tree win zone
+            if (Mathf.Abs(player.transform.position.x - winZoneOwl.transform.position.x) < 25f && 
+            (Mathf.Abs(player.transform.position.z - winZoneOwl.transform.position.z) < 25f))
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
                 endText = "Drats, no dinner for me tonight . . .           You found the warden owl, I'll let you live this time";
-                StartCoroutine(winCoroutine(5f));
+                StartCoroutine(winCoroutine(3f));
+            }
+
+            // Mountain ruins win zone
+            if (Mathf.Abs(player.transform.position.x - winZoneMountain.transform.position.x) < 25f && 
+            (Mathf.Abs(player.transform.position.z - winZoneMountain.transform.position.z) < 25f))
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                endText = "Drats, no dinner for me tonight . . .           You found the ancient altar, I'll let you live this time";
+                StartCoroutine(winCoroutine(3f));
             }
 
             // Cave death scenario
