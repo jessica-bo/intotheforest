@@ -39,6 +39,7 @@ public class TimerScript : MonoBehaviour
     
     public GameObject skull;
     public GameObject winZone;
+    public GameObject winZoneOwl;
     public Light winLight;
     public Color winColStart = new Color(1f, 0.5f, 1f, 1f);
     public Color winColEnd = new Color(1f, 0.8f, 1f, 1f);
@@ -54,7 +55,7 @@ public class TimerScript : MonoBehaviour
         lightToDim.color = colStart;
         lightToDim.intensity = 1f;
 
-        winLight.color = winColStart;
+        // winLight.color = winColStart;
         // winLight.intensity = 1.5f;
     }
 
@@ -112,6 +113,17 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
                 endText = "Drats, no dinner for me tonight . . .           You found the ancient protective sigils, I'll let you live this time";
+                StartCoroutine(winCoroutine(5f));
+            }
+
+            if (Mathf.Abs(player.transform.position.x - winZoneOwl.transform.position.x) < 12f && 
+            (Mathf.Abs(player.transform.position.z - winZoneOwl.transform.position.z) < 12f))
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                endText = "Drats, no dinner for me tonight . . .           You found the warden owl, I'll let you live this time";
                 StartCoroutine(winCoroutine(5f));
             }
 
