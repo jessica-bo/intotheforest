@@ -38,9 +38,10 @@ public class TimerScript : MonoBehaviour
     public float _skyboxBlendFactor = 0f;
     
     public GameObject skull;
-    public GameObject winZone;
+    public GameObject winZoneRuins;
     public GameObject winZoneOwl;
     public GameObject winZoneMountain;
+    public GameObject winZoneHut;
     public Light winLight;
     public Color winColStart = new Color(1f, 0.5f, 1f, 1f);
     public Color winColEnd = new Color(1f, 0.8f, 1f, 1f);
@@ -100,8 +101,8 @@ public class TimerScript : MonoBehaviour
             }
 
             // Ruins win zone
-            if (Mathf.Abs(player.transform.position.x - winZone.transform.position.x) < 12f && 
-            (Mathf.Abs(player.transform.position.z - winZone.transform.position.z) < 12f))
+            if (Mathf.Abs(player.transform.position.x - winZoneRuins.transform.position.x) < 12f && 
+            (Mathf.Abs(player.transform.position.z - winZoneRuins.transform.position.z) < 12f))
             {
                 float t = Mathf.PingPong (Time.time, 0.5f) / 0.5f;
                 winLight.color = Color.Lerp(winColStart, winColEnd, t);
@@ -139,10 +140,22 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(winCoroutine(3f));
             }
 
+            // Hut ruins win zone
+            if (Mathf.Abs(player.transform.position.x - winZoneHut.transform.position.x) < 25f && 
+            (Mathf.Abs(player.transform.position.z - winZoneHut.transform.position.z) < 25f))
+            {
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
+                StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
+
+                endText = "Drats, no dinner for me tonight . . .           You found the wizard's home, I'll let you live this time";
+                StartCoroutine(winCoroutine(3f));
+            }
+
             // Cave death scenario
             if ((player.transform.position.x - skull.transform.position.x) < -18f && 
             (Mathf.Abs(player.transform.position.z - skull.transform.position.z) < 10f) &&
-            (Mathf.Abs(player.transform.position.y - skull.transform.position.y) < 10f))
+            (Mathf.Abs(player.transform.position.y - skull.transform.position.y) < 5f))
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
