@@ -7,23 +7,24 @@ using UnityEngine.Audio;
 public class MainMenu : MonoBehaviour
 {
 
-    public LevelChangerScript leverChangerScript;
-    public AudioSource AudioSource;
+    public LevelChangerScript leverChangerScript; // make level changer script accessible
+    public AudioSource AudioSource; // get the audio source to fade out
 
+    // Ensure cursor is visible and non-locked
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // Start is called before the first frame update
+    // Fade audio and change game
     public void PlayGame()
     {
-        StartCoroutine(FadeAudioSource.StartFade(AudioSource, 2, 0));
+        FadeAudioSource.StartFade(AudioSource, 2, 0);
         leverChangerScript.FadeToLevel("Game");
-        // SceneManager.LoadScene("Game");
     }
 
+    // Quit the application
     public void QuitGame ()
     {
         Debug.Log("QUIT!");

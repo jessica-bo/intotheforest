@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.FPS.Game;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Unity.FPS.Gameplay
 {
@@ -73,7 +70,6 @@ namespace Unity.FPS.Gameplay
         PlayerInputHandler m_InputHandler;
         CharacterController m_Controller;
         Vector3 m_GroundNormal;
-        Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
         float m_LastTimeJumped = 0f;
         float m_CameraVerticalAngle = 0f;
@@ -109,14 +105,11 @@ namespace Unity.FPS.Gameplay
             // landing
             if (IsGrounded && !wasGrounded)
             {
-                // Fall damage
-                float fallSpeed = -Mathf.Min(CharacterVelocity.y, m_LatestImpactSpeed.y);
-
                 // land SFX
                 AudioSource.PlayOneShot(LandSfx);
             }
 
-            HandleCharacterMovement();
+            HandleCharacterMovement(); // check motion
         }
 
         void HandleCharacterMovement()
@@ -149,7 +142,6 @@ namespace Unity.FPS.Gameplay
             {
                 // calculate the desired velocity from inputs, max speed, and current slope
                 Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround;
-                // reduce speed if crouching by crouch speed ratio
 
                 targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) *
                                     targetVelocity.magnitude;

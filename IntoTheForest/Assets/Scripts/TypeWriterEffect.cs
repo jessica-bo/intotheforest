@@ -7,22 +7,23 @@ using UnityEngine.Audio;
 public class TypeWriterEffect : MonoBehaviour
 {
     
-    public float delay = 0.04f;
-    private string currentText = "";
-    public AudioSource AudioSource_type;
+    public float delay = 0.04f; // delay between each letter displayed
+    private string currentText = ""; // displayed text
+    public AudioSource AudioSource_type; // typewriter sound
 
     void Start()
     {
-        StartCoroutine(ShowText());
+        StartCoroutine(ShowText()); // run typewriter script
     }
 
     IEnumerator ShowText() {
-        string fullText = TimerScript.getEndText();
+        string fullText = TimerScript.getEndText(); // get full text from end condition
 
-        yield return new WaitForSeconds(0f);
+        // start typewriter sound
         AudioSource_type.Play();
         yield return new WaitForSeconds(1.5f);
 
+        // print each letter in sequence
         for (int i = 0; i <= fullText.Length; i++) {
             currentText = fullText.Substring(0, i);
             this.GetComponent<Text>().text = currentText;

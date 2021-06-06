@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599318fdf49189e47b1816f0272bb030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.12
+  delay: 0.08
   AudioSource_type: {fileID: 696317824}
 --- !u!114 &696317822
 MonoBehaviour:

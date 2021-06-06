@@ -7,21 +7,26 @@ using UnityEngine.Audio;
 public class RestartGame : MonoBehaviour
 {
     
-    public LevelChangerScript leverChangerScript;
-    public AudioSource AudioSource;
+    public LevelChangerScript leverChangerScript; // make level changing script accessible
+    public AudioSource AudioSource; // audio source to fade
 
+    // ensure cursor is unlocked and visible
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
+    // Fade audio and restart game
     public void RestartButton() {
-        StartCoroutine(FadeAudioSource.StartFade(AudioSource, 2, 0));
+        FadeAudioSource.StartFade(AudioSource, 2, 0);
         leverChangerScript.FadeToLevel("Game");
     }
 
+
+    // Fade audio and reset to menu
     public void MenuButton() {
-        StartCoroutine(FadeAudioSource.StartFade(AudioSource, 2, 0));
+        FadeAudioSource.StartFade(AudioSource, 2, 0);
         leverChangerScript.FadeToLevel("Menu");
     }
 }

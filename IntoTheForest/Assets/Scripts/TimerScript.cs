@@ -1,32 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using Unity.FPS.Gameplay;
 
 public class TimerScript : MonoBehaviour
 {
 
-    public float timeRemaining;
-    public const float totalTime = 120f;
-    public float halfRemaining;
+    public float timeRemaining; // the time remaining until the killscreen
+    public float fadeTime; // fade time for audio transitions
 
-    public float fadeTime;
-
-
+    // light source to dim and initial / final colours
     public Light lightToDim;
-    public Color colStart = new Color(1f, 0.92f, 0.92f, 1f);
+    public Color colStart = new Color(1f, 0.92f, 0.92f, 1f); 
     public Color colEnd = new Color(0.55f, 0.51f, 1f, 1f);
+    
+    // level changer script
+    public LevelChangerScript leverChangerScript;
 
+    // Player objects
+    public PlayerCharacterController PlayerCharacterController;
     public GameObject player;
 
-    public LevelChangerScript leverChangerScript;
-    public PlayerCharacterController PlayerCharacterController;
-
+    // audio mixer
     public AudioMixer mixer;
 
+    // Audio sounds to fade in and out
     public AudioSource AudioSource_ominous;
     public AudioSource AudioSource_ambient;
     public AudioSource AudioSource_birds;
@@ -47,13 +45,22 @@ public class TimerScript : MonoBehaviour
     public Color winColEnd = new Color(1f, 0.8f, 1f, 1f);
     public static string endText;
 
+    private float totalTime;
+    private float halfRemaining;
+
     void Start()
     {
+        totalTime = timeRemaining; // total time from beginning until killscreen
+        halfRemaining = timeRemaining / 2; // time to initiate major changes
+
+        // render fog
         RenderSettings.fog = true;
         RenderSettings.fogDensity = 0.005f;
 
+        // Set volume to menu value
         mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
 
+        // set initial colour / intensity profile of lights
         lightToDim.color = colStart;
         lightToDim.intensity = 1f;
 
@@ -64,6 +71,7 @@ public class TimerScript : MonoBehaviour
         // Countdown time
         if (timeRemaining > 0)
         {
+            // Update time
             timeRemaining -= Time.deltaTime;
 
             // Skybox
@@ -77,10 +85,11 @@ public class TimerScript : MonoBehaviour
             lightToDim.color = Color.Lerp(colStart, colEnd, Mathf.PingPong(Time.time, totalTime) / totalTime);
             lightToDim.intensity -= 0.002f * Time.deltaTime;
 
-            if (PlayerCharacterController.MaxSpeedOnGround > 3 && timeRemaining < halfRemaining)
+            // Slow character speed
+            if (PlayerCharacterController.MaxSpeedOnGround > 5 && timeRemaining < halfRemaining)
             {
-                PlayerCharacterController.MaxSpeedOnGround -= 0.1f * Time.deltaTime;
-                PlayerCharacterController.MaxSpeedInAir -= 0.125f * Time.deltaTime;
+                PlayerCharacterController.MaxSpeedOnGround -= 0.05f * Time.deltaTime;
+                PlayerCharacterController.MaxSpeedInAir -= 0.0625f * Time.deltaTime;
             }
 
             // Audio
@@ -97,7 +106,6 @@ public class TimerScript : MonoBehaviour
             // Fog
             if (timeRemaining < halfRemaining*2 && RenderSettings.fogDensity < 0.04f) {
                 RenderSettings.fogDensity += 0.000015f; 
-                //fog colour?
             }
 
             // Ruins win zone
@@ -180,28 +188,30 @@ public class TimerScript : MonoBehaviour
 
         else
         {
+            // Fade audio and enter time out kill screen
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
             endText = "Oh dear, another one lost to the forest . . .  Better hasten your steps next time";
             StartCoroutine(loseCoroutine(2f));
-            // leverChangerScript.FadeToLevel("LoseGame");
-            // SceneManager.LoadScene("LoseGame");
         }
     }
 
+    // Get win / kill screen end text
     public static string getEndText()
     {
         return endText;
     }
 
+    // transition to win screen
     private IEnumerator winCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         leverChangerScript.FadeToLevel("WinGame");
     }
 
+    // transition to lose screen
     private IEnumerator loseCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
