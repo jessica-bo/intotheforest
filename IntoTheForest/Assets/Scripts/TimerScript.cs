@@ -174,7 +174,7 @@ public class TimerScript : MonoBehaviour
             }
 
             // Out of zone scenario
-            if ((Mathf.Abs(player.transform.position.x) > 425f) || (Mathf.Abs(player.transform.position.z) > 400f))
+            if ((Mathf.Abs(player.transform.position.x) > 475f) || (Mathf.Abs(player.transform.position.z) > 475f))
             {
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_ominous, 1, 0));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));

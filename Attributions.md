@@ -88,7 +88,7 @@ https://creativecommons.org/publicdomain/zero/1.0/
 
 "Skeleton Clipart Free" theHeretic (http://theheretic.me/skeleton-clipart-free/)  
 
-"Vector - Low polygon style illustration of a dark puce brown abstract geometric background" 123RF (https://www.123rf.com/photo_61971471_stock-vector-low-polygon-style-illustration-of-a-dark-puce-brown-abstract-geometric-background-.html)  
+"Vector - Low polygon style illustration of a dark puce brown abstract geometric background" 	123RF (https://www.123rf.com/photo_61971471_stock-vector-low-polygon-style-illustration-of-a-dark-puce-brown-abstract-geometric-background-.html)  
 
 "Rainbow clipart" Publicdomainvectors.com (https://creazilla.com/nodes/63920-rainbow-clipart)  
 Public domain.
