@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -413,7 +413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21, y: -206}
+  m_AnchoredPosition: {x: -155, y: -206}
   m_SizeDelta: {x: 253.5611, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137048089
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '> > QUIT GAME'
+  m_text: ' QUIT GAME'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ce45ac2f2f7e8c41b16be1a4e2ecf60, type: 2}
   m_sharedMaterial: {fileID: -4894307516711001934, guid: 4ce45ac2f2f7e8c41b16be1a4e2ecf60, type: 2}
@@ -1224,7 +1224,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1775812092}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1567,7 +1567,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1775812092}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1919,7 +1919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &810191883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1933,11 +1933,11 @@ RectTransform:
   m_Children:
   - {fileID: 202618265}
   m_Father: {fileID: 1775812092}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -66, y: -130}
+  m_AnchoredPosition: {x: 105, y: -206}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810191884
@@ -3437,9 +3437,9 @@ Transform:
   m_Children:
   - {fileID: 333597426}
   - {fileID: 137048088}
+  - {fileID: 810191883}
   - {fileID: 414195070}
   - {fileID: 582869195}
-  - {fileID: 810191883}
   m_Father: {fileID: 242232092}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
