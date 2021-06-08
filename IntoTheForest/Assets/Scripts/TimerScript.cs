@@ -120,7 +120,7 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                endText = "Drats, no dinner for me tonight . . .           You found the protective sigils, I'll let you live this time";
+                endText = "Drats, no dinner for me tonight . . .           You found the Protective Sigils, I'll let you live this time";
                 StartCoroutine(winCoroutine(3f));
             }
 
@@ -132,7 +132,7 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                endText = "Drats, no dinner for me tonight . . .           You found the warden owl, I'll let you live this time";
+                endText = "Drats, no dinner for me tonight . . .           You found the Warden Owl, I'll let you live this time";
                 StartCoroutine(winCoroutine(3f));
             }
 
@@ -144,7 +144,7 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                endText = "Drats, no dinner for me tonight . . .           You found the ancient altar, I'll let you live this time";
+                endText = "Drats, no dinner for me tonight . . .           You found the Ancient Altar, I'll let you live this time";
                 StartCoroutine(winCoroutine(3f));
             }
 
@@ -156,7 +156,7 @@ public class TimerScript : MonoBehaviour
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0f));
                 StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-                endText = "Drats, no dinner for me tonight . . .           You found the wizard's home, I'll let you live this time";
+                endText = "Drats, no dinner for me tonight . . .           You found the Wizard's House, I'll let you live this time";
                 StartCoroutine(winCoroutine(3f));
             }
 
@@ -193,7 +193,7 @@ public class TimerScript : MonoBehaviour
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_crows, 1, 0));
             StartCoroutine(FadeAudioSource.StartFade(AudioSource_heart, 1, 0));
 
-            endText = "Oh dear, another one lost to the forest . . .  Better hasten your steps next time";
+            endText = "Oh dear, another one lost to the forest . . .  Better hurry up next time!";
             StartCoroutine(loseCoroutine(2f));
         }
     }
